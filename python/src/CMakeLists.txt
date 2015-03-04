@@ -12,5 +12,5 @@ foreach (name
 	target_link_libraries(${name}_c ${PYTHON_LIBRARIES} ${LINK_ALL})
     include_directories(${PYTHON_INCLUDE_DIRS})
 
-	install(TARGETS ${name}_c DESTINATION python)
+	install(TARGETS ${name}_c DESTINATION ${PYTHON_SITE_PACKAGE_DIR})
 endforeach(name)

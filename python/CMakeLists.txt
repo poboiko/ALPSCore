@@ -24,10 +24,15 @@ endif (DocumentationOnly)
 include(ALPSEnableMPI)
 # search for python
 find_package(PythonLibs)
+find_package(PythonInterp)
 if (NOT PYTHONLIBS_FOUND)
   message(FATAL_ERROR " Python libraries not found")
 else(NOT PYTHONLIBS_FOUND)
   set(ALPS_HAVE_PYTHON True)
+  execute_process(COMMAND ${PYTHON_EXECUTABLE} 
+	  -c "from distutils.sysconfig import get_python_lib; import sys; sys.stdout.write(get_python_lib())"
+	  OUTPUT_VARIABLE PYTHON_SITE_PACKAGE_DIR)
+  message(STATUS "Found site-package dir: ${PYTHON_SITE_PACKAGE_DIR}")
 endif (NOT PYTHONLIBS_FOUND)
 # find numpy
 find_package(NumPy REQUIRED)
